@@ -4,6 +4,7 @@ public class MonthReport {
     int quantity;
     int sumOfOne;
     int month;
+
     public MonthReport(String name, boolean isExpense, int quantity, int sumOfOne, int month) {
         this.name = name;
         this.isExpense = isExpense;
@@ -11,8 +12,9 @@ public class MonthReport {
         this.sumOfOne = sumOfOne;
         this.month = month;
     }
-    public int getTotal(){
-        return quantity*sumOfOne;
+
+    public int getTotal() {
+        return quantity * sumOfOne;
     }
 
     @Override

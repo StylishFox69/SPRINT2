@@ -1,14 +1,12 @@
 import java.util.Scanner;
 
 public class BuhApplication {
-    private Scanner scanner;
 
     public void run() {
         ReportService service = new ReportService();
-        InMemoryStorage storage = new InMemoryStorage();
         Checker checker = new Checker(service);
         System.out.println("Enter command ");
-        scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         while (true) {
             printMenu();
             String line = scanner.nextLine();
@@ -34,7 +32,7 @@ public class BuhApplication {
         }
     }
 
-    private void printMenu() {
+    private void printMenu() { // Меню
         System.out.println("1 - Считать все месячные отчёты");
         System.out.println("2 - Считать годовой отчёт");
         System.out.println("3 - Сверить отчёты");

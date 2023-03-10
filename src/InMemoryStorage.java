@@ -1,13 +1,9 @@
 import java.util.ArrayList;
 
-import java.util.LinkedHashMap;
-
+import java.util.HashMap;
 public class InMemoryStorage {
-    LinkedHashMap<Integer, ArrayList<MonthReport>> monthStorage = new LinkedHashMap<>();
-    LinkedHashMap<Integer, ArrayList<YearReport>> yearStorage = new LinkedHashMap<>();
-
-
-
+    HashMap<Integer, ArrayList<MonthReport>> monthStorage = new HashMap<>();
+    HashMap<Integer, ArrayList<YearReport>> yearStorage = new HashMap<>();
 
     public void saveMonthReport(int month, ArrayList<MonthReport> monthReports) {
         monthStorage.put(month, monthReports);
@@ -17,22 +13,21 @@ public class InMemoryStorage {
         yearStorage.put(year, yearReports);
     }
 
-    public int getAverageExpense() {
+    public int getAverageExpense() { // средняя трата за месяц
         ArrayList<YearReport> reports = yearStorage.get(2021);
         int sum = 0;
-        int average = 0;
+        int average;
         for (YearReport report : reports) {
             if (!report.isExpense) {
                 continue;
             }
             sum += report.amount;
-
         }
         average = sum / reports.size();
         return average;
     }
 
-    public int getAverageEarning() {
+    public int getAverageEarning() {// средний заработок за месяц
         ArrayList<YearReport> reports = yearStorage.get(2021);
         int sum = 0;
         int average;
@@ -46,22 +41,22 @@ public class InMemoryStorage {
         return average;
     }
 
-    public int getProfit(int i) {
+    public int getProfit(int i) { // поиск помесячной прибыли
         ArrayList<YearReport> reports = yearStorage.get(2021);
         int amount = 0;
         for (YearReport report : reports) {
-            if(report.monthNumber == i){
-                if(report.isExpense){
+            if (report.monthNumber == i) {
+                if (report.isExpense) {
                     amount -= report.amount;
-                }else {
+                } else {
                     amount += report.amount;
                 }
             }
         }
-        return  amount;
+        return amount;
     }
 
-    public MonthReport getMaxEarning(int month) {
+    public MonthReport getMaxEarning(int month) { // поиск максимального поступления за месяц
         ArrayList<MonthReport> items = monthStorage.get(month);
         MonthReport max = null;
         int total = 0;
@@ -77,7 +72,7 @@ public class InMemoryStorage {
         return max;
     }
 
-    public MonthReport getMaxExpense(int month) {
+    public MonthReport getMaxExpense(int month) {// поиск максимальной траты за месяц
         ArrayList<MonthReport> items = monthStorage.get(month);
         MonthReport max = null;
         int total = 0;
@@ -92,8 +87,4 @@ public class InMemoryStorage {
         }
         return max;
     }
-
-
-
-
 }
